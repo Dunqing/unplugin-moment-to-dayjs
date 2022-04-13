@@ -2,10 +2,14 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "esnext",
-    "lib": ["esnext", "DOM"],
+    "lib": [
+      "esnext",
+      "DOM"
+    ],
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,
+    "jsx": "react-jsx",
     "strictNullChecks": true,
     "resolveJsonModule": true
   }

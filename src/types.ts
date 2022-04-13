@@ -1,3 +1,5 @@
 export interface Options {
-  // define your plugin options here
+  preset?: 'antd' | 'antdv3'
+  plugins?: string[]
+  replaceMoment?: boolean
 }
