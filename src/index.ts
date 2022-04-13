@@ -1,16 +1,22 @@
 import path from 'path'
 import { createUnplugin } from 'unplugin'
 import alias from '@rollup/plugin-alias'
+import type { ResolveIdHook } from 'rollup'
+import MagicString from 'magic-string'
 import { presets } from './config/presets'
 import type { Options } from './types'
+import { generateCode } from './helpers/generateCode'
 
 const ENTRY_FILE_NAME = 'MOMENT_TO_DAYJS_ENTRY'
 
-export default createUnplugin<Options>((options) => {
+export default createUnplugin<Options>((options, meta) => {
+  const { framework } = meta
   const { preset = 'antd' } = options || {}
 
   const plugins = options?.plugins ?? presets[preset].plugins
   const replaceMoment = options?.replaceMoment ?? presets[preset].replaceMoment
+
+  let entrySource = ''
 
   return {
     name: 'unplugin-moment-to-dayjs',
@@ -26,6 +32,9 @@ export default createUnplugin<Options>((options) => {
             },
           }
           : {}
+      },
+      configResolved(config) {
+        console.log('🚀 ~ file: index.ts ~ line 37 ~ configResolved ~ config', config.resolve.alias)
       },
       transformIndexHtml: {
         enforce: 'pre',
@@ -43,6 +52,8 @@ export default createUnplugin<Options>((options) => {
     },
     rollup: {
       options: (options: any) => {
+        if (framework !== 'rollup')
+          return
         options.plugins = [
           alias({
             entries: {
@@ -61,29 +72,31 @@ export default createUnplugin<Options>((options) => {
         moment: 'dayjs',
       }
     },
-    transformInclude(id) {
-      return id.includes(ENTRY_FILE_NAME)
-    },
-    resolveId(id) {
-      if (id.includes(ENTRY_FILE_NAME))
+    // transformInclude(id) {
+    //   console.log(id)
+    //   return id.includes(ENTRY_FILE_NAME)
+    // },
+    async resolveId(...args: Parameters<ResolveIdHook>) {
+      const [source, _, options] = args
+      if (source.includes(ENTRY_FILE_NAME))
         return ENTRY_FILE_NAME
+      if (options?.isEntry === true)
+        entrySource = source
     },
     load(id) {
-      if (id.includes(ENTRY_FILE_NAME)) {
-        return ['import dayjs from "dayjs"']
-          .concat(
-            plugins?.map((plugin) => {
-              return `import ${plugin} from "dayjs/esm/plugin/${plugin}";`
-            }))
-          .concat(
-            plugins?.map(plugin => `dayjs.extend(${plugin});`))
-          .concat(
-            [
-              `import localePlugin from "${path.posix.resolve(__dirname, './plugins/locale.ts')}";`,
-              'dayjs.extend(localePlugin);',
-            ],
-          ).join('\n')
+      if (framework === 'vite' && id.includes(ENTRY_FILE_NAME))
+        return generateCode(plugins)
+    },
+    transform(code, id) {
+      if (framework === 'rollup' && id === entrySource) {
+        const ms = new MagicString(code).prepend(generateCode(plugins))
+
+        return {
+          code: ms.toString(),
+          map: ms.generateMap(),
+        }
       }
+      return code
     },
   }
 })

@@ -1,10 +1,11 @@
 /* eslint-disable no-console */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Calendar, ConfigProvider, DatePicker, Select } from 'antd'
 import 'antd/dist/antd.variable.css'
 import enUS from 'antd/es/locale/en_US'
 import zhCN from 'antd/es/locale/zh_CN'
 import 'moment/locale/zh-cn'
+import moment from 'moment'
 
 const onChange = (value: any) => {
   console.log('🚀 ~ onChange value: ', value)
@@ -12,6 +13,10 @@ const onChange = (value: any) => {
 
 const App = () => {
   const [locale, setLocale] = useState<string>('en_US')
+
+  useEffect(() => {
+    console.log(locale, moment, moment.locale(locale))
+  }, [locale])
 
   return <div style={{
     display: 'flex',

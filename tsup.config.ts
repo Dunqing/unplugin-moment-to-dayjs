@@ -1,11 +1,11 @@
-import { Options } from 'tsup'
+import type { Options } from 'tsup'
 
 export default <Options>{
-  entryPoints: [
+  entry: [
     'src/*.ts',
+    'src/plugins/*.ts',
   ],
   clean: true,
   format: ['cjs', 'esm'],
-  dts: true,
-  onSuccess: 'npm run build:fix',
+  dts: false,
 }

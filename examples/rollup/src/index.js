@@ -1,3 +1,5 @@
 import moment from 'moment'
+import hello from './hello'
 
-console.log('🚀 ~ file: index.js ~ line 2 ~ moment', moment())
+console.log('🚀 moment', moment())
+console.log('🚀 hello', hello())
