@@ -54,6 +54,7 @@
   ],
   "scripts": {
     "build": "tsup",
+    "playground": "pnpm run --filter './playground' build",
     "build:examples": "pnpm run --filter './examples' build ",
     "dev": "tsup --watch src",
     "build:fix": "esno scripts/postbuild.ts",
