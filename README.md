@@ -2,22 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/unplugin-moment-to-dayjs?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-moment-to-dayjs)
 
-Starter template for [unplugin](https://github.com/unjs/unplugin).
-
-## Template Usage
-
-To use this template, clone it down using:
-
-```bash
-npx degit antfu/unplugin-moment-to-dayjs my-unplugin
-```
-
-And do a global replace of `unplugin-moment-to-dayjs` with your plugin name.
-
-Then you can start developing your unplugin 🔥
-
-To test your plugin, run: `pnpm run dev`
-To release a new version, run: `pnpm run release`
+**Replace moment with dayjs, works with all libraries**
 
 ## Install
 
@@ -30,11 +15,11 @@ npm i unplugin-moment-to-dayjs
 
 ```ts
 // vite.config.ts
-import Starter from 'unplugin-moment-to-dayjs/vite'
+import momentTodayjs from 'unplugin-moment-to-dayjs/vite'
 
 export default defineConfig({
   plugins: [
-    Starter({ /* options */ }),
+    momentTodayjs({ /* options */ }),
   ],
 })
 ```
@@ -48,11 +33,11 @@ Example: [`playground/`](./playground/)
 
 ```ts
 // rollup.config.js
-import Starter from 'unplugin-moment-to-dayjs/rollup'
+import momentTodayjs from 'unplugin-moment-to-dayjs/rollup'
 
 export default {
   plugins: [
-    Starter({ /* options */ }),
+    momentTodayjs({ /* options */ }),
   ],
 }
 ```
@@ -68,8 +53,8 @@ export default {
 module.exports = {
   /* ... */
   plugins: [
-    require('unplugin-moment-to-dayjs/webpack')({ /* options */ })
-  ]
+    require('unplugin-moment-to-dayjs/webpack')({ /* options */ }),
+  ],
 }
 ```
 
@@ -106,3 +91,14 @@ module.exports = {
 ```
 
 <br></details>
+
+
+### Options
+
+Please reference [antd-dayjs-webpack-plugin](https://github.com/ant-design/antd-dayjs-webpack-plugin)
+
+### Thanks
+
+- moment
+- dayjs
+- antd-dayjs-webpack-plugin
