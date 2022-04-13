@@ -8,13 +8,13 @@
     "rollup",
     "transform"
   ],
-  "homepage": "https://github.com/antfu/unplugin-moment-to-dayjs#readme",
+  "homepage": "https://github.com/1247748612/unplugin-moment-to-dayjs#readme",
   "bugs": {
-    "url": "https://github.com/antfu/unplugin-moment-to-dayjs/issues"
+    "url": "https://github.com/1247748612/unplugin-moment-to-dayjs/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antfu/unplugin-moment-to-dayjs.git"
+    "url": "git+https://github.com/1247748612/unplugin-moment-to-dayjs.git"
   },
   "license": "MIT",
   "main": "dist/index.js",
