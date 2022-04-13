@@ -40,6 +40,13 @@ export default createUnplugin<Options>((options) => {
         },
       },
     },
+    webpack(compiler) {
+      const { resolve } = compiler.options
+      resolve.alias = {
+        ...resolve.alias,
+        moment: 'dayjs',
+      }
+    },
     transformInclude(id) {
       return id.includes(ENTRY_FILE_NAME)
     },
