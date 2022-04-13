@@ -5,6 +5,7 @@ importers:
   .:
     specifiers:
       '@antfu/eslint-config': ^0.20.2
+      '@rollup/plugin-alias': ^3.1.9
       '@types/jest': ^27.4.1
       '@types/node': ^16.11.26
       bumpp: ^6.1.0
@@ -26,6 +27,7 @@ importers:
       unplugin: 0.6.1_922885e9564168bd74de71e389756083
     devDependencies:
       '@antfu/eslint-config': 0.20.2_eslint@8.13.0+typescript@4.6.3
+      '@rollup/plugin-alias': 3.1.9_rollup@2.70.1
       '@types/jest': 27.4.1
       '@types/node': 16.11.26
       bumpp: 6.1.0
@@ -42,6 +44,21 @@ importers:
       typescript: 4.6.3
       vite: 2.9.1
       webpack: 5.72.0
+
+  examples/rollup:
+    specifiers:
+      '@rollup/plugin-node-resolve': ^13.2.0
+      dayjs: ^1.11.0
+      moment: ^2.29.2
+      rollup: ^2.70.1
+      unplugin-moment-to-dayjs: workspace:*
+    dependencies:
+      dayjs: 1.11.0
+      moment: 2.29.2
+    devDependencies:
+      '@rollup/plugin-node-resolve': 13.2.0_rollup@2.70.1
+      rollup: 2.70.1
+      unplugin-moment-to-dayjs: link:../..
 
   playground:
     specifiers:
@@ -884,6 +901,43 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
+  /@rollup/plugin-alias/3.1.9_rollup@2.70.1:
+    resolution: {integrity: sha512-QI5fsEvm9bDzt32k39wpOwZhVzRcL5ydcffUHMyLVaVaLeC70I8TJZ17F1z1eMoLu4E/UOcH9BWVkKpIKdrfiw==}
+    engines: {node: '>=8.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    dependencies:
+      rollup: 2.70.1
+      slash: 3.0.0
+    dev: true
+
+  /@rollup/plugin-node-resolve/13.2.0_rollup@2.70.1:
+    resolution: {integrity: sha512-GuUIUyIKq7EjQxB51XSn6zPHYo+cILQQBYOGYvFFNxws2OVOqCBShAoof2hFrV8bAZzZGDBDQ8m2iUt8SLOUkg==}
+    engines: {node: '>= 10.0.0'}
+    peerDependencies:
+      rollup: ^2.42.0
+    dependencies:
+      '@rollup/pluginutils': 3.1.0_rollup@2.70.1
+      '@types/resolve': 1.17.1
+      builtin-modules: 3.2.0
+      deepmerge: 4.2.2
+      is-module: 1.0.0
+      resolve: 1.22.0
+      rollup: 2.70.1
+    dev: true
+
+  /@rollup/pluginutils/3.1.0_rollup@2.70.1:
+    resolution: {integrity: sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==}
+    engines: {node: '>= 8.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    dependencies:
+      '@types/estree': 0.0.39
+      estree-walker: 1.0.1
+      picomatch: 2.3.1
+      rollup: 2.70.1
+    dev: true
+
   /@rollup/pluginutils/4.2.0:
     resolution: {integrity: sha512-2WUyJNRkyH5p487pGnn4tWAsxhEFKN/pT8CMgHshd5H+IXkOnKvKZwsz5ZWz+YCXkleZRAU5kwbfgF8CPfDRqA==}
     engines: {node: '>= 8.0.0'}
@@ -964,6 +1018,10 @@ packages:
       '@types/json-schema': 7.0.11
     dev: true
 
+  /@types/estree/0.0.39:
+    resolution: {integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==}
+    dev: true
+
   /@types/estree/0.0.51:
     resolution: {integrity: sha512-CuPgU6f3eT/XgKKPqKd/gLZV1Xmvf1a2R5POBOGQa6uv82xpls89HU5zKeVoyR8XzHd1RGNOlQlvUe3CFkjWNQ==}
     dev: true
@@ -1039,6 +1097,12 @@ packages:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
       csstype: 3.0.11
+    dev: true
+
+  /@types/resolve/1.17.1:
+    resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
+    dependencies:
+      '@types/node': 16.11.26
     dev: true
 
   /@types/scheduler/0.16.2:
@@ -2896,6 +2960,10 @@ packages:
     engines: {node: '>=4.0'}
     dev: true
 
+  /estree-walker/1.0.1:
+    resolution: {integrity: sha512-1fMXF3YP4pZZVozF8j/ZLfvnR8NSIljt56UhbZ5PeeDmmGHpgpdwQt7ITlGvYaQukCvuBRMLEiKiYC+oeIg4cg==}
+    dev: true
+
   /estree-walker/2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
     dev: true
@@ -3502,6 +3570,10 @@ packages:
     dependencies:
       global-dirs: 3.0.0
       is-path-inside: 3.0.3
+    dev: true
+
+  /is-module/1.0.0:
+    resolution: {integrity: sha1-Mlj7afeMFNW4FdZkM2tM/7ZEFZE=}
     dev: true
 
   /is-negative-zero/2.0.2:

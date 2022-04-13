@@ -1,5 +1,6 @@
 import path from 'path'
 import { createUnplugin } from 'unplugin'
+import alias from '@rollup/plugin-alias'
 import { presets } from './config/presets'
 import type { Options } from './types'
 
@@ -40,8 +41,21 @@ export default createUnplugin<Options>((options) => {
         },
       },
     },
+    rollup: {
+      options: (options: any) => {
+        options.plugins = [
+          alias({
+            entries: {
+              moment: 'dayjs',
+            },
+          }),
+          ...options.plugins,
+        ]
+        return options
+      },
+    },
     webpack(compiler) {
-      const { resolve } = compiler.options
+      const { resolve } = (compiler as any).options
       resolve.alias = {
         ...resolve.alias,
         moment: 'dayjs',

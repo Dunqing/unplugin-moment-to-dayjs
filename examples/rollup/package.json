@@ -1,0 +1,44 @@
+{
+  "name": "rollup-example",
+  "version": "0.1.0",
+  "keywords": [
+    "unplugin",
+    "vite",
+    "webpack",
+    "rollup",
+    "transform"
+  ],
+  "homepage": "https://github.com/antfu/unplugin-moment-to-dayjs#readme",
+  "bugs": {
+    "url": "https://github.com/antfu/unplugin-moment-to-dayjs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antfu/unplugin-moment-to-dayjs.git"
+  },
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "*.d.ts"
+  ],
+  "scripts": {
+    "build": "pnpm exec rollup -c",
+    "dev": "pnpm run build -- --watch"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.0",
+    "moment": "^2.29.2"
+  },
+  "devDependencies": {
+
+    "rollup": "^2.70.1",
+    "@rollup/plugin-node-resolve": "^13.2.0",
+    "unplugin-moment-to-dayjs": "workspace:*"
+  },
+  "peerDependencies": {
+    "dayjs": "^1.11.0"
+  }
+}
