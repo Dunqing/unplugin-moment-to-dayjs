@@ -3,7 +3,7 @@ import { createUnplugin } from 'unplugin'
 import { presets } from './config/presets'
 import type { Options } from './types'
 
-const ENTRY_FILE_NAME = '/MOMENT_TO_DAYJS_ENTRY.ts'
+const ENTRY_FILE_NAME = 'MOMENT_TO_DAYJS_ENTRY'
 
 export default createUnplugin<Options>((options) => {
   const { preset = 'antd' } = options || {}
@@ -49,15 +49,19 @@ export default createUnplugin<Options>((options) => {
     },
     load(id) {
       if (id.includes(ENTRY_FILE_NAME)) {
-        return ['import dayjs from "dayjs"', 'console.log(dayjs)'].concat(
-          plugins?.map((plugin) => {
-            return `import ${plugin} from "dayjs/esm/plugin/${plugin}";\ndayjs.extend(${plugin});`
-          }).concat(
+        return ['import dayjs from "dayjs"']
+          .concat(
+            plugins?.map((plugin) => {
+              return `import ${plugin} from "dayjs/esm/plugin/${plugin}";`
+            }))
+          .concat(
+            plugins?.map(plugin => `dayjs.extend(${plugin});`))
+          .concat(
             [
               `import localePlugin from "${path.posix.resolve(__dirname, './plugins/locale.ts')}";`,
               'dayjs.extend(localePlugin);',
             ],
-          )).join('\n')
+          ).join('\n')
       }
     },
   }
