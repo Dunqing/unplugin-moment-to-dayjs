@@ -1,4 +1,3 @@
-import path from 'path'
 import { createUnplugin } from 'unplugin'
 import alias from '@rollup/plugin-alias'
 import type { ResolveIdHook } from 'rollup'
@@ -32,9 +31,6 @@ export default createUnplugin<Options>((options, meta) => {
             },
           }
           : {}
-      },
-      configResolved(config) {
-        console.log('🚀 ~ file: index.ts ~ line 37 ~ configResolved ~ config', config.resolve.alias)
       },
       transformIndexHtml: {
         enforce: 'pre',
@@ -76,8 +72,8 @@ export default createUnplugin<Options>((options, meta) => {
     //   console.log(id)
     //   return id.includes(ENTRY_FILE_NAME)
     // },
-    async resolveId(...args: Parameters<ResolveIdHook>) {
-      const [source, _, options] = args
+    async resolveId(...args: any[]) {
+      const [source, , options] = args as Parameters<ResolveIdHook>
       if (source.includes(ENTRY_FILE_NAME))
         return ENTRY_FILE_NAME
       if (options?.isEntry === true)
