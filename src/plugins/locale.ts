@@ -13,7 +13,7 @@ const parseLocale = function parseLocale(locale: string) {
 }
 
 const locale: PluginFunc = (o, dayjsClass, d) => {
-  const generateLocale = (locale: any) => (function(this: dayjs.Dayjs, preset: string | ILocale, object?: Partial<ILocale>, isLocal: any) {
+  const generateLocale = (locale: any) => (function(this: dayjs.Dayjs, preset: string | ILocale, object?: Partial<ILocale>, isLocal?: any) {
     if (typeof preset === 'string') {
       preset = parseLocale(preset)
     }
