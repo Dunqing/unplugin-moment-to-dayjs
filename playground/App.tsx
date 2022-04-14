@@ -15,7 +15,7 @@ const App = () => {
   const [locale, setLocale] = useState<string>('en_US')
 
   useEffect(() => {
-    console.log(locale, moment, moment.locale(locale))
+    moment.locale(locale)
   }, [locale])
 
   return <div style={{

@@ -12,9 +12,8 @@ const parseLocale = function parseLocale(locale: string) {
   return Reflect.get(localeMap, locale) ?? locale.split('_')[0]
 }
 
-const locale: PluginFunc = (o, dayjsClass) => {
-  const originalLocale = dayjsClass.prototype.locale
-  dayjsClass.prototype.locale = (function(this: dayjs.Dayjs, preset: string | ILocale, object?: Partial<ILocale>) {
+const locale: PluginFunc = (o, dayjsClass, d) => {
+  const generateLocale = (locale: any) => (function(this: dayjs.Dayjs, preset: string | ILocale, object?: Partial<ILocale>, isLocal: any) {
     if (typeof preset === 'string') {
       preset = parseLocale(preset)
     }
@@ -24,8 +23,11 @@ const locale: PluginFunc = (o, dayjsClass) => {
         name: parseLocale(preset.name),
       }
     }
-    return originalLocale.call(this, preset, object)
-  }) as typeof originalLocale
+    return locale.call(this, preset, object, isLocal)
+  }) as any
+
+  dayjsClass.prototype.locale = generateLocale(dayjsClass.prototype.locale)
+  d.locale = generateLocale(d.locale)
 }
 
 export default locale
