@@ -15,11 +15,11 @@ npm i unplugin-moment-to-dayjs
 
 ```ts
 // vite.config.ts
-import momentTodayjs from 'unplugin-moment-to-dayjs/vite'
+import momentToDayjs from 'unplugin-moment-to-dayjs/vite'
 
 export default defineConfig({
   plugins: [
-    momentTodayjs({ /* options */ }),
+    momentToDayjs({ /* options */ }),
   ],
 })
 ```
@@ -33,11 +33,11 @@ Example: [`playground/`](./playground/)
 
 ```ts
 // rollup.config.js
-import momentTodayjs from 'unplugin-moment-to-dayjs/rollup'
+import momentToDayjs from 'unplugin-moment-to-dayjs/rollup'
 
 export default {
   plugins: [
-    momentTodayjs({ /* options */ }),
+    momentToDayjs({ /* options */ }),
   ],
 }
 ```
