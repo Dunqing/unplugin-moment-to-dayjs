@@ -60,38 +60,6 @@ module.exports = {
 
 <br></details>
 
-<details>
-<summary>Nuxt</summary><br>
-
-```ts
-// nuxt.config.js
-export default {
-  buildModules: [
-    ['unplugin-moment-to-dayjs/nuxt', { /* options */ }],
-  ],
-}
-```
-
-> This module works for both Nuxt 2 and [Nuxt Vite](https://github.com/nuxt/vite)
-
-<br></details>
-
-<details>
-<summary>Vue CLI</summary><br>
-
-```ts
-// vue.config.js
-module.exports = {
-  configureWebpack: {
-    plugins: [
-      require('unplugin-moment-to-dayjs/webpack')({ /* options */ }),
-    ],
-  },
-}
-```
-
-<br></details>
-
 
 ### Options
 
