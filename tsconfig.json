@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "..",
     "target": "es2017",
     "module": "esnext",
     "lib": [
@@ -11,6 +12,6 @@
     "strict": true,
     "jsx": "react-jsx",
     "strictNullChecks": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
   }
 }

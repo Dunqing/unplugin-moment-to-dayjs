@@ -1,6 +1,5 @@
 import { createUnplugin } from 'unplugin'
 import alias from '@rollup/plugin-alias'
-import type { ResolveIdHook } from 'rollup'
 import MagicString from 'magic-string'
 import { presets } from './config/presets'
 import type { Options } from './types'
@@ -15,7 +14,7 @@ export default createUnplugin<Options>((options, meta) => {
   const plugins = options?.plugins ?? presets[preset].plugins
   const replaceMoment = options?.replaceMoment ?? presets[preset].replaceMoment
 
-  let entrySource = ''
+  const entrySource = ''
 
   return {
     name: 'unplugin-moment-to-dayjs',
@@ -47,7 +46,11 @@ export default createUnplugin<Options>((options, meta) => {
       },
     },
     rollup: {
-      options: (options: any) => {
+      resolveId(source, _, options) {
+        if (options.isEntry)
+          return `${source}?${ENTRY_FILE_NAME}`
+      },
+      options: (options) => {
         if (framework !== 'rollup')
           return
         options.plugins = [
@@ -56,7 +59,7 @@ export default createUnplugin<Options>((options, meta) => {
               moment: 'dayjs',
             },
           }),
-          ...options.plugins,
+          ...(options.plugins || []),
         ]
         return options
       },
@@ -72,12 +75,9 @@ export default createUnplugin<Options>((options, meta) => {
     //   console.log(id)
     //   return id.includes(ENTRY_FILE_NAME)
     // },
-    async resolveId(...args: any[]) {
-      const [source, , options] = args as Parameters<ResolveIdHook>
+    async resolveId(source) {
       if (source.includes(ENTRY_FILE_NAME))
         return ENTRY_FILE_NAME
-      if (options?.isEntry === true)
-        entrySource = source
     },
     load(id) {
       if (framework === 'vite' && id.includes(ENTRY_FILE_NAME))
