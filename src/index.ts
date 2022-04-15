@@ -5,16 +5,15 @@ import { presets } from './config/presets'
 import type { Options } from './types'
 import { generateCode } from './helpers/generateCode'
 
-const ENTRY_FILE_NAME = 'MOMENT_TO_DAYJS_ENTRY'
+const ENTRY_FLAG = 'MOMENT_TO_DAYJS_ENTRY'
 
-export default createUnplugin<Options>((options, meta) => {
-  const { framework } = meta
+export default createUnplugin<Options>((options) => {
   const { preset = 'antd' } = options || {}
 
   const plugins = options?.plugins ?? presets[preset].plugins
   const replaceMoment = options?.replaceMoment ?? presets[preset].replaceMoment
 
-  const entrySource = ''
+  let entryId: string
 
   return {
     name: 'unplugin-moment-to-dayjs',
@@ -38,7 +37,7 @@ export default createUnplugin<Options>((options, meta) => {
             tag: 'script',
             attrs: {
               type: 'module',
-              src: `${ENTRY_FILE_NAME}`,
+              src: ENTRY_FLAG,
             },
             injectTo: 'body-prepend',
           }]
@@ -46,13 +45,13 @@ export default createUnplugin<Options>((options, meta) => {
       },
     },
     rollup: {
-      resolveId(source, _, options) {
+      async resolveId(source, importer, options) {
         if (options.isEntry)
-          return `${source}?${ENTRY_FILE_NAME}`
+          entryId = source
+
+        return null
       },
       options: (options) => {
-        if (framework !== 'rollup')
-          return
         options.plugins = [
           alias({
             entries: {
@@ -73,26 +72,25 @@ export default createUnplugin<Options>((options, meta) => {
     },
     // transformInclude(id) {
     //   console.log(id)
-    //   return id.includes(ENTRY_FILE_NAME)
+    //   return id.includes(ENTRY_FLAG)
     // },
-    async resolveId(source) {
-      if (source.includes(ENTRY_FILE_NAME))
-        return ENTRY_FILE_NAME
+    resolveId(source) {
+      if (source.includes(ENTRY_FLAG))
+        return ENTRY_FLAG
     },
     load(id) {
-      if (framework === 'vite' && id.includes(ENTRY_FILE_NAME))
+      if (id.endsWith(ENTRY_FLAG))
         return generateCode(plugins)
     },
     transform(code, id) {
-      if (framework === 'rollup' && id === entrySource) {
-        const ms = new MagicString(code).prepend(generateCode(plugins))
-
+      if (id === entryId) {
+        const ms = new MagicString(code)
+        ms.append(generateCode(plugins))
         return {
           code: ms.toString(),
           map: ms.generateMap(),
         }
       }
-      return code
     },
   }
 })

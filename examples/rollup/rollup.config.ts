@@ -10,8 +10,8 @@ export default defineConfig({
   },
   external: ['dayjs'],
   plugins: [
-    nodeResolve(),
     Unplugin({
     }),
+    nodeResolve(),
   ],
 })
