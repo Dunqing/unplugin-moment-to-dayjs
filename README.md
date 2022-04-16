@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/unplugin-moment-to-dayjs?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-moment-to-dayjs)
 
-**Replace moment with dayjs, works with all libraries**
+**Replace moment with dayjs, support use in vite, rollup, webpack**
 
 ## Install
 
