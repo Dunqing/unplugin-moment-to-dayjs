@@ -53,14 +53,16 @@ export default createUnplugin<Options>((options) => {
         return null
       },
       options: (options) => {
-        options.plugins = [
-          alias({
-            entries: {
-              moment: 'dayjs',
-            },
-          }),
-          ...(options.plugins || []),
-        ]
+        if (replaceMoment) {
+          options.plugins = [
+            alias({
+              entries: {
+                moment: 'dayjs',
+              },
+            }),
+            ...(options.plugins || []),
+          ]
+        }
         return options
       },
     },
