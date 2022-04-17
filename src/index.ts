@@ -4,6 +4,7 @@ import MagicString from 'magic-string'
 import { presets } from './config/presets'
 import type { Options } from './types'
 import { generateCode } from './helpers/generateCode'
+import makeEntry from './helpers/markEntry'
 
 const ENTRY_FLAG = 'MOMENT_TO_DAYJS_ENTRY'
 
@@ -64,16 +65,19 @@ export default createUnplugin<Options>((options) => {
       },
     },
     webpack(compiler) {
-      const { resolve } = (compiler as any).options
-      resolve.alias = {
-        ...resolve.alias,
-        moment: 'dayjs',
+      const { resolve } = compiler.options
+
+      compiler.options.entry = makeEntry(compiler.options.entry, ENTRY_FLAG) as any
+      if (replaceMoment) {
+        resolve.alias = {
+          ...resolve.alias,
+          moment: 'dayjs',
+        }
       }
     },
-    // transformInclude(id) {
-    //   console.log(id)
-    //   return id.includes(ENTRY_FLAG)
-    // },
+    transformInclude(id) {
+      return id.includes(ENTRY_FLAG)
+    },
     resolveId(source) {
       if (source.includes(ENTRY_FLAG))
         return ENTRY_FLAG

@@ -1,0 +1,43 @@
+{
+  "name": "rollup-example",
+  "version": "0.1.0",
+  "keywords": [
+    "unplugin",
+    "vite",
+    "webpack",
+    "rollup",
+    "transform"
+  ],
+  "homepage": "https://github.com/1247748612/unplugin-moment-to-dayjs#readme",
+  "bugs": {
+    "url": "https://github.com/1247748612/unplugin-moment-to-dayjs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1247748612/unplugin-moment-to-dayjs.git"
+  },
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "*.d.ts"
+  ],
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack --watch"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.0",
+    "moment": "^2.29.2"
+  },
+  "devDependencies": {
+    "unplugin-moment-to-dayjs": "workspace:*",
+    "webpack": "5.72.0",
+    "webpack-cli": "4.9.2"
+  },
+  "peerDependencies": {
+    "dayjs": "^1.11.0"
+  }
+}
