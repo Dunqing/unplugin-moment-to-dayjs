@@ -8,4 +8,5 @@ export default <Options>{
   clean: true,
   format: ['cjs', 'esm'],
   dts: true,
+  onSuccess: 'pnpm run build:fix',
 }
