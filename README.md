@@ -61,7 +61,7 @@ module.exports = {
 <br></details>
 
 
-### Options
+## Options
 
 Please reference [antd-dayjs-webpack-plugin](https://github.com/ant-design/antd-dayjs-webpack-plugin)
 
@@ -70,7 +70,7 @@ Please reference [antd-dayjs-webpack-plugin](https://github.com/ant-design/antd-
 
 - [vite-ant-design-pro](https://github.com/Dunqing/vite-ant-design-pro/tree/main/playground)
 
-### Thanks
+## Thanks
 
 - moment
 - dayjs
