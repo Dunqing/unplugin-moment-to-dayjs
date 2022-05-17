@@ -3,7 +3,7 @@ export const generateCode = (plugins: string[] = []) => {
   return ['', `import ${dayjs} from "dayjs"`]
     .concat(
       plugins?.map((plugin) => {
-        return `import ${plugin} from "dayjs/esm/plugin/${plugin}";`
+        return `import ${plugin} from "dayjs/plugin/${plugin}";`
       }))
     .concat(
       plugins?.map(plugin => `${dayjs}.extend(${plugin});`))
