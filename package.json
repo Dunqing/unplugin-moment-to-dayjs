@@ -63,9 +63,9 @@
   ],
   "scripts": {
     "build": "tsup",
-    "playground": "pnpm run --filter './playground' build",
-    "build:examples": "pnpm run --filter ./examples build ",
-    "dev:examples": "pnpm run --filter ./examples dev ",
+    "playground": "pnpm --filter ./playground run  build",
+    "build:examples": "pnpm --filter ./examples/* run build",
+    "dev:examples": "pnpm --filter ./examples/* run dev",
     "dev": "tsup --watch src",
     "build:fix": "esno scripts/postbuild.ts",
     "lint": "eslint \"{src,test}/**/*.ts\"",
